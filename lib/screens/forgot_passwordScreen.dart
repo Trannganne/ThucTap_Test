@@ -29,6 +29,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
+      showBack: true,
       formContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -121,6 +122,7 @@ class PasswordSentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
+      showBack: true,
       formContent: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

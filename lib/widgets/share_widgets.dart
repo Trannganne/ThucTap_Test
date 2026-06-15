@@ -69,10 +69,18 @@ class AuthLayout extends StatelessWidget {
         bottom: false,
         child: Stack(
           children: [
-            // CỤM ĐÁM MÂY ICON NẰM Ở GÓC PHẢI
+            Positioned(
+              top: 60,
+              left: 24,
+              child: Image.asset(
+                'assets/images/logo.jpg',
+                height: 45,
+                fit: BoxFit.contain,
+              ),
+            ),
             Positioned(
               top: 10,
-              right: -20, // Đẩy nhẹ một phần đám mây ra viền phải giống ảnh mẫu
+              right: -20,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -103,8 +111,7 @@ class AuthLayout extends StatelessWidget {
                       border: Border.all(
                         color: Colors.white.withOpacity(0.2),
                         width: 1,
-                        style: BorderStyle
-                            .solid, // Có thể dùng package để vẽ nét đứt chuẩn, hoặc nét liền mờ như này đã rất giống rồi
+                        style: BorderStyle.solid,
                       ),
                     ),
                   ),
