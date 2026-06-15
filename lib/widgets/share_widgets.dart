@@ -53,79 +53,141 @@ class AuthLayout extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200,
+      height:
+          220, // Tăng nhẹ chiều cao để cụm icon đám mây hiển thị thoáng và đẹp hơn
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFFEF5350), Color(0xFFE53935)],
+          colors: [
+            Color(0xFFF3705A),
+            Color(0xFFE53935),
+          ], // Đổi màu cam nhẹ ở đỉnh giống ảnh gốc
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
       ),
       child: SafeArea(
-        bottom:
-            false, // Không tính phần đệm phía dưới của tai thỏ để tối ưu diện tích
+        bottom: false,
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              right: -10,
-              child: _bubble(110, Colors.white.withOpacity(0.12)),
-            ),
-            Positioned(
-              top: 20,
-              right: 50,
-              child: _bubble(70, Colors.white.withOpacity(0.10)),
-            ),
-            Positioned(
-              top: 30,
-              right: 20,
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white.withOpacity(0.6),
-                size: 28,
-              ),
-            ),
-            Positioned(
-              top: 55,
-              right: 65,
-              child: Icon(
-                Icons.person_outline,
-                color: Colors.white.withOpacity(0.55),
-                size: 22,
-              ),
-            ),
+            // CỤM ĐÁM MÂY ICON NẰM Ở GÓC PHẢI
             Positioned(
               top: 10,
-              right: 95,
-              child: Icon(
-                Icons.bar_chart_outlined,
-                color: Colors.white.withOpacity(0.45),
-                size: 20,
-              ),
-            ),
-            Positioned(
-              top: 55,
-              right: 22,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.25),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: const Text(
-                  'PG',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
+              right: -20, // Đẩy nhẹ một phần đám mây ra viền phải giống ảnh mẫu
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 1. Lớp nền "Đám mây" mờ to nhất phía sau
+                  Container(
+                    width: 180,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
-                ),
+                  // Lớp nền mờ nhỏ hơn lồng bên trong để tạo hiệu ứng chuyển khối
+                  Container(
+                    width: 150,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+
+                  // 2. Các đường vạch đứt kết nối hình vuông (Sử dụng Container viền chỉ)
+                  Container(
+                    width: 75,
+                    height: 75,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.2),
+                        width: 1,
+                        style: BorderStyle
+                            .solid, // Có thể dùng package để vẽ nét đứt chuẩn, hoặc nét liền mờ như này đã rất giống rồi
+                      ),
+                    ),
+                  ),
+
+                  // 3. ICON PHÍA TRÊN: Hình người (Màu trắng phẳng)
+                  Positioned(
+                    top: 15,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.25),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+
+                  // 4. ICON BÊN TRÁI: Xe hàng
+                  Positioned(
+                    left: 15,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.25),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+
+                  // 5. ICON BÊN PHẢI: Đường đan chéo định tuyến (Đã đổi đúng loại icon)
+                  Positioned(
+                    right: 25,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.25),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.alt_route,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+
+                  // 6. ICON PHÍA DƯỚI: Chữ PG hình tròn
+                  Positioned(
+                    bottom: 15,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.25),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Text(
+                        'PG',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+
+            // NÚT BACK (NẾU CÓ)
             if (showBack)
               Positioned(
-                top: 4,
-                left: 4,
+                top: 12,
+                left: 8,
                 child: IconButton(
                   icon: const Icon(
                     Icons.arrow_back_ios,
